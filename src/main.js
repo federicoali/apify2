@@ -8,7 +8,7 @@ const { log } = Apify.utils;
 Apify.main(async () => {
     const input = await Apify.getValue('INPUT');
 
-    console.log(input.inputUrl.url,toString());
+    console.log(input.inputUrl.url.toString());
 
     // Validate the input
     if (!input) throw new Error('Missing configuration');
