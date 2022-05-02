@@ -65,14 +65,13 @@ function formUrl(countryCode) {
 async function makeRequestList(queries, inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
     let sources = [];
-    console.log(inputUrl);
     
     if (!inputUrl) {
         sources = queries.map((query) => {
-            const { url } = formUrl(countryCode, query);
+            const { inputUrl } = formUrl(countryCode, query);
 
             return new Apify.Request({
-                url,
+                inputUrl,
                 userData: {
                     label: 'SEARCH_PAGE',
                     query,
@@ -88,25 +87,25 @@ async function makeRequestList(queries, inputUrl, countryCode) {
         for await (const req of fromStartUrls(inputUrl)) {
             // Parse out the keyword from the provided URL and format it into our own URL
             // Why? Selectors seem to be different depending on the TYPE of Google Shopping page you're on
-            const { url } = formUrl(countryCode, inputUrl);
-            startUrls.push({ ...req, url });
+            const { inputUrl } = formUrl(countryCode, inputUrl);
+            startUrls.push({ ...req, inputUrl });
         }
         sources = startUrls.map((startUrl) => {
             // URL has to start with plain http for SERP proxy to work
-            let { url } = startUrl;
-            if (url.startsWith('https')) {
-                url = url.replace('https', 'http');
+            let { inputUrl } = startUrl;
+            if (inputUrl.startsWith('https')) {
+                inputUrl = inputUrl.replace('https', 'http');
             }
 
-            if (url.startsWith('http://google')) {
-                url = url.replace('http://google', 'http://www.google');
+            if (inputUrl.startsWith('http://google')) {
+                inputUrl = inputUrl.replace('http://google', 'http://www.google');
             }
 
             return new Apify.Request({
-                url,
+                inputUrl,
                 userData: {
                     label: 'SEARCH_PAGE',
-                    query: url,
+                    query: inputUrl,
                     hostname,
                     savedItems: 0,
                     pageNumber: 1,
