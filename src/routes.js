@@ -13,7 +13,7 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     await page.waitForSelector('div.sg-product__dpdp-c');
 
     const resultsLength = await page.evaluate(() => {
-        return document.querySelector('tbody.sh-osd__online-sellers-cont').children.length;
+        return document.getElementById('sh-osd__online-sellers-cont').children.length;
     });
 
 
