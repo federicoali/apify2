@@ -1,4 +1,5 @@
 const Apify = require('apify');
+const Apify = require(input);
 
 const { log } = Apify.utils;
 const googleDomains = require('./google-domains.json');

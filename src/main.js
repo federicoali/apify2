@@ -8,10 +8,6 @@ const { log } = Apify.utils;
 Apify.main(async () => {
     const input = await Apify.getValue('INPUT');
 
-    module.exports = {
-        input
-    };
-
     // Validate the input
     if (!input) throw new Error('Missing configuration');
 
