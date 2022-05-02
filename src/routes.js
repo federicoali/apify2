@@ -10,10 +10,10 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     let { savedItems, pageNumber } = request.userData;
     const { hostname } = request.userData;
 
-    await page.waitForSelector('tr.sh-osd__offer-row');
+    await page.waitForSelector('tbody.sh-osd__online-sellers-cont');
 
     const resultsLength = await page.evaluate(() => {
-        return document.querySelector('r.sh-osd__offer-row').children.length;
+        return document.querySelector('tbody.sh-osd__online-sellers-cont').tr.length;
     });
 
 
