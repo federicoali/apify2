@@ -55,13 +55,13 @@ function countryCodeToGoogleHostname(countryCode) {
 }
 
 // New function which forms a URL from countryCode and query params
-function formUrl(countryCode, query) {
+function formUrl(countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
-    const url = `http://www.${hostname}/search?q=${encodeURIComponent(query)}&tbm=shop&tbs=vw:l`;
+    const url = inputUrl;
     return { url, hostname };
 }
 
-console.log(query);
+console.log(inputUrl);
 
 async function makeRequestList(queries, inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
