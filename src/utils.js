@@ -3,8 +3,6 @@ const Apify = require('apify');
 const { log } = Apify.utils;
 const googleDomains = require('./google-domains.json');
 
-console.log(input, inputUrl);
-
 function checkAndEval(extendOutputFunction) {
     let evaledFunc;
     try {
