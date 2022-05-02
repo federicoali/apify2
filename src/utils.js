@@ -55,9 +55,9 @@ function countryCodeToGoogleHostname(countryCode) {
 }
 
 // New function which forms a URL from countryCode and query params
-function formUrl(countryCode, inputUrl) {
+function formUrl(countryCode, input) {
     const hostname = countryCodeToGoogleHostname(countryCode);
-    const url = inputUrl;
+    const url = input;
     return { url, hostname };
 }
 
