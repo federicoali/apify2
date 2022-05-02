@@ -11,27 +11,25 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     const { hostname } = request.userData;
 
     await page.waitForSelector('#sh-oo__offers-grid-wrapper');
-    
-    
-   
+
+
+    // check HTML if page has no results
+    if (resultsLength === 0) {
+        log.warning('The page has no results. Check dataset for more info.');
+
+        await Apify.pushData({
+            '#debug': Apify.utils.createRequestDebugInfo(request),
+        });
+    }
+
+
     // eslint-disable-next-line no-shadow
     const data = await page.evaluate(
         (maxPostCount, query, savedItems) => {
-
             const resultsLength = document.querySelector('#sh-osd__online-sellers-grid').rows.length;
 
-
-            // check HTML if page has no results
-            if (resultsLength === 0) {
-                log.warning('The page has no results. Check dataset for more info.');
-        
-                await Apify.pushData({
-                    '#debug': Apify.utils.createRequestDebugInfo(request),
-                });
-            }
-        
-        
             log.info(`Found ${resultsLength} products on the page.`);
+
             // nodes with items
             let results = Array.from(document.querySelectorAll('.sh-dlr__list-result'));
             if (results.length === 0) results = Array.from(document.querySelectorAll('.sh-dgr__content'));
