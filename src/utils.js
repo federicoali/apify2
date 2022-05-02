@@ -62,8 +62,45 @@ function formUrl(countryCode) {
 }
 
 
-async function makeRequestList( inputUrl, countryCode) {
+async function makeRequestList(queries, inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
+    let sources = [];
+    
+    if (!inputUrl) {
+        sources = queries.map((query) => {
+            const { inputUrl } = formUrl(countryCode, query);
+
+            return new Apify.Request({
+                inputUrl,
+                userData: {
+                    label: 'SEARCH_PAGE',
+                    query,
+                    hostname,
+                    savedItems: 0,
+                    pageNumber: 1,
+                },
+            });
+        });
+        
+    } else {
+        const startUrls = [];
+        for await (const req of fromStartUrls(inputUrl)) {
+            // Parse out the keyword from the provided URL and format it into our own URL
+            // Why? Selectors seem to be different depending on the TYPE of Google Shopping page you're on
+            const { url } = formUrl(countryCode, inputUrl);
+            startUrls.push({ ...req, url });
+        }
+        sources = startUrls.map((startUrl) => {
+            // URL has to start with plain http for SERP proxy to work
+            let { inputUrl } = startUrl;
+            if (inputUrl.startsWith('https')) {
+                inputUrl = inputUrl.replace('https', 'http');
+            }
+
+            if (inputUrl.startsWith('http://google')) {
+                inputUrl = inputUrl.replace('http://google', 'http://www.google');
+            }
+
             return new Apify.Request({
                 inputUrl,
                 userData: {
@@ -74,6 +111,9 @@ async function makeRequestList( inputUrl, countryCode) {
                     pageNumber: 1,
                 },
             });
+        });
+    }
+    return Apify.openRequestList('products', url);
 }
 
 // FUNCTION TO DEAL WITH ALL TYPES OF START URLS  (EXTERNAL CSV FILE, LOCAL TXT-FILE, NORMAL URL)
