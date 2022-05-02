@@ -3,7 +3,6 @@ const Apify = require('apify');
 const { log } = Apify.utils;
 const googleDomains = require('./google-domains.json');
 
-
 function checkAndEval(extendOutputFunction) {
     let evaledFunc;
     try {
@@ -56,22 +55,22 @@ function countryCodeToGoogleHostname(countryCode) {
 }
 
 // New function which forms a URL from countryCode and query params
-function formUrl(countryCode) {
+function formUrl(countryCode, query) {
     const hostname = countryCodeToGoogleHostname(countryCode);
-    return { hostname };
+    const url = `http://www.${hostname}/search?q=${encodeURIComponent(query)}&tbm=shop&tbs=vw:l`;
+    return { url, hostname };
 }
-
 
 async function makeRequestList(queries, inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
     let sources = [];
-    
+
     if (!inputUrl) {
         sources = queries.map((query) => {
-            const { inputUrl } = formUrl(countryCode, query);
+            const { url } = formUrl(countryCode, query);
 
             return new Apify.Request({
-                inputUrl,
+                url,
                 userData: {
                     label: 'SEARCH_PAGE',
                     query,
@@ -81,31 +80,31 @@ async function makeRequestList(queries, inputUrl, countryCode) {
                 },
             });
         });
-        
     } else {
         const startUrls = [];
         for await (const req of fromStartUrls(inputUrl)) {
             // Parse out the keyword from the provided URL and format it into our own URL
             // Why? Selectors seem to be different depending on the TYPE of Google Shopping page you're on
-            const { url } = formUrl(countryCode, inputUrl);
+            const keyword = new URL(req.url).searchParams.get('q');
+            const { url } = formUrl(countryCode, keyword);
             startUrls.push({ ...req, url });
         }
         sources = startUrls.map((startUrl) => {
             // URL has to start with plain http for SERP proxy to work
-            let { inputUrl } = startUrl;
-            if (inputUrl.startsWith('https')) {
-                inputUrl = inputUrl.replace('https', 'http');
+            let { url } = startUrl;
+            if (url.startsWith('https')) {
+                url = url.replace('https', 'http');
             }
 
-            if (inputUrl.startsWith('http://google')) {
-                inputUrl = inputUrl.replace('http://google', 'http://www.google');
+            if (url.startsWith('http://google')) {
+                url = url.replace('http://google', 'http://www.google');
             }
 
             return new Apify.Request({
-                inputUrl,
+                url,
                 userData: {
                     label: 'SEARCH_PAGE',
-                    query: inputUrl,
+                    query: url,
                     hostname,
                     savedItems: 0,
                     pageNumber: 1,
@@ -113,7 +112,7 @@ async function makeRequestList(queries, inputUrl, countryCode) {
             });
         });
     }
-    return Apify.openRequestList('products', url);
+    return Apify.openRequestList('products', sources);
 }
 
 // FUNCTION TO DEAL WITH ALL TYPES OF START URLS  (EXTERNAL CSV FILE, LOCAL TXT-FILE, NORMAL URL)
