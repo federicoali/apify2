@@ -61,12 +61,12 @@ function formUrl(countryCode) {
     return { hostname };
 }
 
-console.log(url);
 
 async function makeRequestList(queries, inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
     let sources = [];
-
+    console.log(inputUrl);
+    
     if (!inputUrl) {
         sources = queries.map((query) => {
             const { url } = formUrl(countryCode, query);
