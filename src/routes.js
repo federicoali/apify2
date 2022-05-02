@@ -16,6 +16,8 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
         (maxPostCount, query, savedItems) => {
             const resultsLength = document.getElementById('sh-osd__online-sellers-grid').rows.length;
 
+            console.log(resultsLength);
+
 
             // nodes with items
             let results = Array.from(document.querySelectorAll('tbody.sh-osd__online-sellers-cont'));
