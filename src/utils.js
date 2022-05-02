@@ -56,9 +56,9 @@ function countryCodeToGoogleHostname(countryCode) {
 }
 
 // New function which forms a URL from countryCode and query params
-function formUrl(countryCode, inputUrl) {
+function formUrl(countryCode, input) {
     const hostname = countryCodeToGoogleHostname(countryCode);
-    const url = inputUrl.toString();
+    const url = input.toString();
     return { url, hostname };
 }
 
@@ -114,7 +114,7 @@ async function makeRequestList(queries, inputUrl, countryCode) {
             });
         });
     }
-    return Apify.openRequestList('products', inputUrl);
+    return Apify.openRequestList('products', url);
 }
 
 // FUNCTION TO DEAL WITH ALL TYPES OF START URLS  (EXTERNAL CSV FILE, LOCAL TXT-FILE, NORMAL URL)
