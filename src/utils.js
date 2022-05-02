@@ -114,7 +114,7 @@ async function makeRequestList(queries, inputUrl, countryCode) {
             });
         });
     }
-    return Apify.openRequestList('products', url);
+    return Apify.openRequestList('products', inputUrl);
 }
 
 // FUNCTION TO DEAL WITH ALL TYPES OF START URLS  (EXTERNAL CSV FILE, LOCAL TXT-FILE, NORMAL URL)
