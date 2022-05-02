@@ -32,7 +32,7 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     const data = await page.evaluate(
         (maxPostCount, query, savedItems) => {
             // nodes with items
-            let results = Array.from(document.querySelectorAll('sh-osd__offer-row'));
+            let results = Array.from(document.querySelectorAll('.sh-osd__offer-row'));
             // limit the results to be scraped, if maxPostCount exists
             console.log('result', results);
             // eslint-disable-next-line no-shadow
@@ -42,13 +42,13 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
                 // Please pay attention that "merchantMetrics" and "reviewsLink" were removed from the  "SEARCH" page.
                 const item = results[i];
                 // KEYS OF OUTPUT OBJ
-                const company = document.querySelector(".kPMwsc").innerText;
+                const company = item.querySelector(".kPMwsc").innerText;
 
-                const price = document.querySelector(".fObmGc").innerText;
+                const price = item.querySelector(".fObmGc").innerText;
 
-                const details = document.querySelector(".yGibJf").innerText;
+                const details = item.querySelector(".yGibJf").innerText;
 
-                const total = document.querySelector(".drzWO").innerText;
+                const total = item.querySelector(".drzWO").innerText;
 
                 // FINAL OUTPUT OBJ
                 const output = {
