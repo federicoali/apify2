@@ -11,7 +11,7 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     const { hostname } = request.userData;
 
     await page.waitForSelector('#sh-osd__online-sellers-grid');
-
+    console.log(document);
     const resultsLength = document.getElementById("d0wB0c").rows.length;
 
 
