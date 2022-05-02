@@ -13,7 +13,7 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     await page.waitForSelector('tbody.sh-osd__online-sellers-cont');
 
     const resultsLength = await page.evaluate(() => {
-        return document.querySelector('tbody.sh-osd__online-sellers-cont').tr.length;
+        return document.getElementById('tbody.sh-osd__online-sellers-cont').rows.length;
     });
 
 
