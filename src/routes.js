@@ -16,21 +16,16 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
         (maxPostCount, query, savedItems) => {
             const resultsLength = document.getElementById('sh-osd__online-sellers-grid').rows.length;
 
-            console.log(resultsLength);
 
 
             // nodes with items
             let results = Array.from(document.querySelectorAll('tbody.sh-osd__online-sellers-cont'));
 
-            // limit the results to be scraped, if maxPostCount exists
-            if (maxPostCount) {
-                results = results.slice(0, maxPostCount - savedItems);
-            }
 
             // eslint-disable-next-line no-shadow
             const data = [];
             // ITERATING NODES TO GET RESULTS
-            for (let i = 0; i < results.length; i++) {
+            for (let i = 0; i < resultsLength; i++) {
                 // Please pay attention that "merchantMetrics" and "reviewsLink" were removed from the  "SEARCH" page.
                 const item = results[i];
                 // KEYS OF OUTPUT OBJ
