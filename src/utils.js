@@ -68,7 +68,7 @@ async function makeRequestList(queries, inputUrl, countryCode) {
 
     if (!inputUrl) {
         sources = queries.map((query) => {
-            const { url } = formUrl(countryCode, query);
+            const { url } = formUrl(countryCode, inputUrl);
 
             return new Apify.Request({
                 url,
@@ -86,8 +86,7 @@ async function makeRequestList(queries, inputUrl, countryCode) {
         for await (const req of fromStartUrls(inputUrl)) {
             // Parse out the keyword from the provided URL and format it into our own URL
             // Why? Selectors seem to be different depending on the TYPE of Google Shopping page you're on
-            const keyword = new URL(req.url).searchParams.get('q');
-            const { url } = formUrl(countryCode, keyword);
+            const { url } = formUrl(countryCode, inputUrl);
             startUrls.push({ ...req, url });
         }
         sources = startUrls.map((startUrl) => {
