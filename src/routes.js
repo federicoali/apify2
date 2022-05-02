@@ -10,10 +10,10 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     let { savedItems, pageNumber } = request.userData;
     const { hostname } = request.userData;
 
-    await page.waitForSelector('div.sh-pr__product-results');
+    await page.waitForSelector('#sh-osd__online-sellers-cont > tr:nth-child(1)');
 
     const resultsLength = await page.evaluate(() => {
-        return document.querySelector('div.sh-pr__product-results').children.length;
+        return document.querySelector('#sh-osd__online-sellers-cont > tr:nth-child(1)').children.length;
     });
 
 
