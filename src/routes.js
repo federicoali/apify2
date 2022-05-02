@@ -13,8 +13,10 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     await page.waitForSelector('div.sg-product__dpdp-c');
 
     const resultsLength = await page.evaluate(() => {
-        return document.querySelector('div.sh-osd__online-sellers-cont.tr').children.length;
+        return document.querySelector('tbody.sh-osd__online-sellers-cont').children.length;
     });
+
+
     // check HTML if page has no results
     if (resultsLength === 0) {
         log.warning('The page has no results. Check dataset for more info.');
