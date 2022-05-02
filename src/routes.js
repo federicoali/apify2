@@ -42,13 +42,13 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
                 // Please pay attention that "merchantMetrics" and "reviewsLink" were removed from the  "SEARCH" page.
                 const item = results[i];
                 // KEYS OF OUTPUT OBJ
-                const company = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child(1) > td:nth-child(1) > div.kPMwsc > a")?.textContent ?? null;
+                const company = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child > td:nth-child > div.kPMwsc > a")?.textContent ?? null;
 
-                const price = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child(1) > td.SH30Lb.yGibJf")?.textContent ?? null;
+                const price = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child > td.SH30Lb.yGibJf")?.textContent ?? null;
 
-                const details = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child(1) > td:nth-child(3) > span")?.textContent ?? null;
+                const details = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child > td:nth-child > span")?.textContent ?? null;
 
-                const total = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child(1) > td:nth-child(4) > div > div.drzWO")?.textContent ?? null;
+                const total = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child > td:nth-child > div > div.drzWO")?.textContent ?? null;
 
                 // FINAL OUTPUT OBJ
                 const output = {
