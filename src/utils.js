@@ -58,10 +58,10 @@ function countryCodeToGoogleHostname(countryCode) {
 function formUrl(countryCode, inputUrl) {
     const hostname = countryCodeToGoogleHostname(countryCode);
     const url = inputUrl;
+    console.log(url);
     return { url, hostname };
 }
 
-console.log(url);
 
 async function makeRequestList(queries, inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
