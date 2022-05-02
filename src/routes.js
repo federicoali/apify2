@@ -14,7 +14,7 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     // eslint-disable-next-line no-shadow
     const data = await page.evaluate(
         (maxPostCount, query, savedItems) => {
-            const resultsLength = document.querySelector('.sh-osd__online-sellers-grid').rows.length;
+            const resultsLength = document.querySelector('.sh-osd__online-sellers-grid.d0wB0c').rows.length;
 
 
             // nodes with items
