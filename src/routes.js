@@ -13,16 +13,6 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     await page.waitForSelector('#sh-oo__offers-grid-wrapper');
 
 
-    // check HTML if page has no results
-    if (resultsLength === 0) {
-        log.warning('The page has no results. Check dataset for more info.');
-
-        await Apify.pushData({
-            '#debug': Apify.utils.createRequestDebugInfo(request),
-        });
-    }
-
-
     // eslint-disable-next-line no-shadow
     const data = await page.evaluate(
         (maxPostCount, query, savedItems) => {
