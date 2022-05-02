@@ -10,8 +10,6 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     let { savedItems, pageNumber } = request.userData;
     const { hostname } = request.userData;
 
-    await page.waitForSelector('d0wB0c');
-
 
     // eslint-disable-next-line no-shadow
     const data = await page.evaluate(
