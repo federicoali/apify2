@@ -12,7 +12,7 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
 
     await page.waitForSelector('#sh-osd__online-sellers-grid');
 
-    const table = document.getElementById("d0wB0c");
+    const table = page.getElementById("d0wB0c");
 
     const resultsLength = table.rows.length;
 
