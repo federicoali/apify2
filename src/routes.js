@@ -33,7 +33,7 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
         (maxPostCount, query, savedItems) => {
             // nodes with items
             let results = Array.from(document.querySelectorAll('.sh-osd__online-sellers-cont'));
-            if (results.length === 0) results = Array.from(document.querySelectorAll('.sh-dgr__content'));
+            if (results.length === 0) results = Array.from(document.querySelectorAll('.sh-osd__offer-row'));
             // limit the results to be scraped, if maxPostCount exists
             if (maxPostCount) {
                 results = results.slice(0, maxPostCount - savedItems);
@@ -46,13 +46,13 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
                 // Please pay attention that "merchantMetrics" and "reviewsLink" were removed from the  "SEARCH" page.
                 const item = results[i];
                 // KEYS OF OUTPUT OBJ
-                const company = document.querySelector("a.b5ycib");
+                const company = document.querySelector(".a.b5ycib");
 
-                const price = document.querySelector("g9WBQb");
+                const price = document.querySelector(".g9WBQb");
 
-                const details = document.querySelector("td.SH30Lb");
+                const details = document.querySelector(".td.SH30Lb");
 
-                const total = document.querySelector("drzWO");
+                const total = document.querySelector(".drzWO");
 
                 // FINAL OUTPUT OBJ
                 const output = {
