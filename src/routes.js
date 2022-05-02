@@ -10,13 +10,13 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     let { savedItems, pageNumber } = request.userData;
     const { hostname } = request.userData;
 
-    await page.waitForSelector('#sh-oo__offers-grid-wrapper');
+    await page.waitForSelector('.sh-oo__offers-grid-wrapper');
 
 
     // eslint-disable-next-line no-shadow
     const data = await page.evaluate(
         (maxPostCount, query, savedItems) => {
-            const resultsLength = document.querySelector('#sh-osd__online-sellers-grid').rows.length;
+            const resultsLength = document.querySelector('.sh-osd__online-sellers-grid').rows.length;
 
 
             // nodes with items
