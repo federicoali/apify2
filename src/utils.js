@@ -3,6 +3,7 @@ const Apify = require('apify');
 const { log } = Apify.utils;
 const googleDomains = require('./google-domains.json');
 
+
 function checkAndEval(extendOutputFunction) {
     let evaledFunc;
     try {
@@ -57,9 +58,10 @@ function countryCodeToGoogleHostname(countryCode) {
 // New function which forms a URL from countryCode and query params
 function formUrl(countryCode, inputUrl) {
     const hostname = countryCodeToGoogleHostname(countryCode);
-    const url = inputUrl;
+    const url = inputUrl.toString();
     return { url, hostname };
 }
+
 
 
 async function makeRequestList(queries, inputUrl, countryCode) {
@@ -68,7 +70,7 @@ async function makeRequestList(queries, inputUrl, countryCode) {
 
     if (!inputUrl) {
         sources = queries.map((query) => {
-            const { url } = formUrl(countryCode, inputUrl);
+            const { url } = formUrl(countryCode, query);
 
             return new Apify.Request({
                 url,
@@ -92,6 +94,13 @@ async function makeRequestList(queries, inputUrl, countryCode) {
         sources = startUrls.map((startUrl) => {
             // URL has to start with plain http for SERP proxy to work
             let { url } = startUrl;
+            if (url.startsWith('https')) {
+                url = url.replace('https', 'http');
+            }
+
+            if (url.startsWith('http://google')) {
+                url = url.replace('http://google', 'http://www.google');
+            }
 
             return new Apify.Request({
                 url,
