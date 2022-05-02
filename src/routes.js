@@ -10,6 +10,22 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     let { savedItems, pageNumber } = request.userData;
     const { hostname } = request.userData;
 
+    await page.waitForSelector('div.sh-pr__product-results');
+
+    const resultsLength = await page.evaluate(() => {
+        return document.querySelector('div.sh-pr__product-results').children.length;
+    });
+
+
+    // check HTML if page has no results
+    if (resultsLength === 0) {
+        log.warning('The page has no results. Check dataset for more info.');
+
+        await Apify.pushData({
+            '#debug': Apify.utils.createRequestDebugInfo(request),
+        });
+    }
+
 
     log.info(`Found ${resultsLength} products on the page.`);
     // eslint-disable-next-line no-shadow
@@ -26,25 +42,47 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
             // eslint-disable-next-line no-shadow
             const data = [];
             // ITERATING NODES TO GET RESULTS
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < results.length; i++) {
                 // Please pay attention that "merchantMetrics" and "reviewsLink" were removed from the  "SEARCH" page.
                 const item = results[i];
                 // KEYS OF OUTPUT OBJ
-                const company = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child(1) > td:nth-child(1) > div.kPMwsc > a");
+                const title = item.querySelector('h3') ? item.querySelector('h3') : null;
 
-                const price = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child(1) > td:nth-child(3) > span");
+                const productName = title?.textContent ?? null;
 
-                const details = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child(1) > td.SH30Lb.yGibJf > div");
+                const productLinkAnchor = item.querySelector('a[href*="shopping/product/"]')
+                    ? item.querySelector('a[href*="shopping/product/"]')
+                    : null;
+                const productLink = productLinkAnchor ? productLinkAnchor.href : null;
 
-                const total = document.querySelector("#sh-osd__online-sellers-cont > tr:nth-child(1) > td:nth-child(4) > div > div.drzWO");
+                const price = item.querySelector('div[data-sh-or="price"] div > span > span')?.textContent ?? null;
+
+                const description = item.querySelectorAll('div.hBUZL')[1]?.textContent ?? null;
+
+                const merchantName = item.querySelector('div[data-sh-or="price"]')?.nextSibling?.textContent ?? null;
+
+                const merchantLink = item.querySelector('div[data-sh-or="price"]')?.parentElement?.parentElement?.href ?? null;
+
+                const idArray = productLink ? productLink.split('?')[0].split('/') : null;
+                const shoppingId = idArray ? idArray[idArray.length - 1] : null;
+
+                const reviewsScore = item.querySelector('div[aria-label*="product reviews"] span')?.textContent ?? null;
+                const reviewsCount = item.querySelector('div[aria-label*="product reviews"]')
+                    ? item.querySelector('div[aria-label*="product reviews"]').getAttribute('aria-label').split(' ')[0]
+                    : null;
 
                 // FINAL OUTPUT OBJ
                 const output = {
                     query,
-                    company,
-                    details,
+                    productName,
+                    productLink,
                     price,
-                    total,
+                    description,
+                    merchantName,
+                    merchantLink,
+                    shoppingId,
+                    reviewsScore,
+                    reviewsCount,
                     positionOnSearchPage: i + 1,
                     productDetails: item.querySelectorAll('.translate-content')[1]?.textContent.trim(),
                 };
