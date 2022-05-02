@@ -61,8 +61,6 @@ function formUrl(countryCode) {
     return { url, hostname };
 }
 
-console.log(inputUrl);
-
 async function makeRequestList(queries, inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
     let sources = [];
