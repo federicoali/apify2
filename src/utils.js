@@ -1,7 +1,9 @@
-const Apify = require('apify', input);
+const Apify = require('apify');
 
 const { log } = Apify.utils;
 const googleDomains = require('./google-domains.json');
+
+console.log(input, inputUrl);
 
 function checkAndEval(extendOutputFunction) {
     let evaledFunc;
@@ -55,9 +57,9 @@ function countryCodeToGoogleHostname(countryCode) {
 }
 
 // New function which forms a URL from countryCode and query params
-function formUrl(countryCode, input) {
+function formUrl(countryCode, inputUrl) {
     const hostname = countryCodeToGoogleHostname(countryCode);
-    const url = input;
+    const url = inputUrl;
     return { url, hostname };
 }
 
