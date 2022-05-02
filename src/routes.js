@@ -10,7 +10,6 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     let { savedItems, pageNumber } = request.userData;
     const { hostname } = request.userData;
 
-    await page.waitForSelector('table.d0wB0c');
 
     const resultsLength = await page.evaluate(() => {
         return document.getElementById('d0wB0c').rows.length;
