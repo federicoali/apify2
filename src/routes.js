@@ -10,9 +10,10 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     let { savedItems, pageNumber } = request.userData;
     const { hostname } = request.userData;
 
-    await page.waitForSelector('#sh-osd__online-sellers-grid');
-    console.log(document);
-    const resultsLength = document.getElementById("d0wB0c").rows.length;
+    await page.waitForSelector('#sh-oo__offers-grid-wrapper');
+    
+    
+    const resultsLength = document.querySelector('#sh-osd__online-sellers-grid').rows.length;
 
 
     // check HTML if page has no results
