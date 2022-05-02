@@ -69,5 +69,4 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
         await Apify.pushData(item);
         savedItems++;
     }
-    log.info(`${Math.min(maxPostCount, resultsLength)} items on the page were successfully scraped.`);
 };
