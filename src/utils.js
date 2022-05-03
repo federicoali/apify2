@@ -49,34 +49,27 @@ async function applyFunction(page, extendOutputFunction, item) {
     return { ...item, ...result };
 }
 
-function countryCodeToGoogleHostname(countryCode) {
-    const suffix = countryCode.toUpperCase();
-    return googleDomains[suffix];
-}
 
 // New function which forms a URL from countryCode and query params
-function formUrl(countryCode, inputUrl) {
-    const hostname = countryCodeToGoogleHostname(countryCode);
+function formUrl(inputUrl) {
     const url = inputUrl;
     console.log('url', url, 'input', inputUrl);
     return { url, hostname };
 }
 
 
-async function makeRequestList(queries, inputUrl, countryCode) {
-    const hostname = countryCodeToGoogleHostname(countryCode);
+async function makeRequestList(queries, inputUrl) {
     let sources = [];
 
     if (!inputUrl) {
         sources = queries.map((query) => {
-            const { url } = formUrl(countryCode, query);
+            const { url } = formUrl(query);
 
             return new Apify.Request({
                 url,
                 userData: {
                     label: 'SEARCH_PAGE',
                     query,
-                    hostname,
                     savedItems: 0,
                     pageNumber: 1,
                 },
@@ -101,7 +94,6 @@ async function makeRequestList(queries, inputUrl, countryCode) {
                 userData: {
                     label: 'SEARCH_PAGE',
                     query: url,
-                    hostname,
                     savedItems: 0,
                     pageNumber: 1,
                 },
