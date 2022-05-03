@@ -63,7 +63,7 @@ function formUrl(countryCode, inputUrl) {
 }
 
 
-async function makeRequestList(queries, inputUrl, countryCode) {
+async function makeRequestList(inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
     let sources = [];
 
@@ -78,7 +78,7 @@ async function makeRequestList(queries, inputUrl, countryCode) {
             }
 
             if (url.startsWith('http://google')) {
-                url = url.replace('http://google.it', 'http://www.google.it');
+                url = url.replace('http://google', 'http://www.google');
             }
 
             return new Apify.Request({
