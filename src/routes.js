@@ -5,9 +5,9 @@ const {
 } = Apify;
 const { applyFunction } = require('./utils');
 
-exports.SEARCH_PAGE = async (page, request, query, maxPostCount, evaledFunc) => {
+exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, evaledFunc) => {
     // CHECK FOR SELECTOR
-    let { savedItems } = request.userData;
+    let { savedItems, pageNumber } = request.userData;
     const { hostname } = request.userData;
 
     await page.waitForSelector('#sh-osd__online-sellers-grid');
