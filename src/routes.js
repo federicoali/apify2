@@ -10,7 +10,7 @@ exports.SEARCH_PAGE = async (page, request, query, maxPostCount, evaledFunc) => 
     let { savedItems } = request.userData;
     const { hostname } = request.userData;
 
-    await page.waitForSelector('#sh-osd__online-sellers-grid');
+    await page.waitForSelector('#sh-oo__offers-grid-wrapper');
 
     const resultsLength = await page.evaluate(() => {
         return document.getElementById('sh-osd__online-sellers-cont').children.length;
