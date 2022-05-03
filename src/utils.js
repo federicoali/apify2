@@ -1,7 +1,6 @@
 const Apify = require('apify');
 
 const { log } = Apify.utils;
-const googleDomains = require('./google-domains.json');
 
 function checkAndEval(extendOutputFunction) {
     let evaledFunc;
@@ -47,15 +46,6 @@ async function applyFunction(page, extendOutputFunction, item) {
     }
 
     return { ...item, ...result };
-}
-
-
-// New function which forms a URL from countryCode and query params
-function formUrl(inputUrl) {
-    const hostname = "IT";
-    const url = inputUrl;
-    console.log('url', url, 'input', inputUrl);
-    return { url, hostname };
 }
 
 
