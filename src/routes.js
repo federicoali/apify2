@@ -31,10 +31,10 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     // eslint-disable-next-line no-shadow
     const data = await page.evaluate(
         (maxPostCount, query, savedItems) => {
-            console.log('sono dentro');
+            log.info('sono dentro');
             // nodes with items
             let results = Array.from(document.querySelectorAll('#sh-osd__online-sellers-cont'));
-            console.log('result', results)
+            log.info('result', results)
             if (results.length === 0) results = Array.from(document.querySelectorAll('.sh-dgr__content'));
             // limit the results to be scraped, if maxPostCount exists
             if (maxPostCount) {
