@@ -32,8 +32,8 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     const data = await page.evaluate(
         (maxPostCount, query, savedItems) => {
             // nodes with items
-            let results = Array.from(document.querySelectorAll('#sh-osd__online-sellers-cont'));
-            if (results.length === 0) results = Array.from(document.querySelectorAll('.sh-dgr__content'));
+            let results = Array.from(document.querySelectorAll('#sh-osd__online-sellers-grid'));
+            if (results.length === 0) results = Array.from(document.querySelectorAll('#sh-osd__online-sellers-cont > tr'));
             // limit the results to be scraped, if maxPostCount exists
             if (maxPostCount) {
                 results = results.slice(0, maxPostCount - savedItems);
@@ -46,13 +46,13 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
                 // Please pay attention that "merchantMetrics" and "reviewsLink" were removed from the  "SEARCH" page.
                 const item = results[i];
                 // KEYS OF OUTPUT OBJ
-                const company = item.querySelector(".kPMwsc").innerText;
+                const company = item.querySelector("#sh-osd__online-sellers-cont > tr > td").innerText;
 
-                const price = item.querySelector(".fObmGc").innerText;
+                const price = item.querySelector("#sh-osd__online-sellers-cont > tr > td").innerText;
 
-                const details = item.querySelector(".yGibJf").innerText;
+                const details = item.querySelector("#sh-osd__online-sellers-cont > tr > td.SH30Lb.yGibJf").innerText;
 
-                const total = item.querySelector(".drzWO").innerText;
+                const total = item.querySelector("#sh-osd__online-sellers-cont > tr > td").innerText;
 
                 // FINAL OUTPUT OBJ
                 const output = {
