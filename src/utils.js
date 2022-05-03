@@ -79,7 +79,7 @@ async function makeRequestList(inputUrl, countryCode) {
                 userData: {
                     label: 'SEARCH_PAGE',
                     query: url,
-                    hostname: 'IT',
+                    hostname,
                     savedItems: 0,
                     pageNumber: 1,
                 },
