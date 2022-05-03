@@ -87,7 +87,6 @@ async function makeRequestList(queries, inputUrl, countryCode) {
         
         sources = startUrls.map((startUrl) => {
             // URL has to start with plain http for SERP proxy to work
-            let { url } = startUrl;
 
             return new Apify.Request({
                 url,
