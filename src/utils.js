@@ -49,12 +49,22 @@ async function applyFunction(page, extendOutputFunction, item) {
     return { ...item, ...result };
 }
 
-function formUrl(inputUrl) {
-    const url = inputUrl;
-    return { url };
+function countryCodeToGoogleHostname(countryCode) {
+    const suffix = countryCode.toUpperCase();
+    return googleDomains[suffix];
 }
 
-async function makeRequestList(inputUrl) {
+// New function which forms a URL from countryCode and query params
+function formUrl(countryCode, inputUrl) {
+    const hostname = countryCodeToGoogleHostname(countryCode);
+    const url = inputUrl;
+    console.log('url', url, 'input', inputUrl);
+    return { url, hostname };
+}
+
+
+async function makeRequestList(queries, inputUrl, countryCode) {
+    const hostname = countryCodeToGoogleHostname(countryCode);
     let sources = [];
 
     if (inputUrl) {
@@ -76,7 +86,7 @@ async function makeRequestList(inputUrl) {
                 userData: {
                     label: 'SEARCH_PAGE',
                     query: url,
-                    hostname: 'IT',
+                    hostname,
                     savedItems: 0,
                     pageNumber: 1,
                 },
