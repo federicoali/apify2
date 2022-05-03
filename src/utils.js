@@ -62,6 +62,7 @@ function formUrl(countryCode, inputUrl) {
 }
 
 async function makeRequestList(inputUrl, countryCode) {
+    const hostname = countryCodeToGoogleHostname(countryCode);
     let sources = [];
 
     if (inputUrl) {
@@ -82,7 +83,7 @@ async function makeRequestList(inputUrl, countryCode) {
                 url,
                 userData: {
                     label: 'SEARCH_PAGE',
-                    query,
+                    query: url,
                     hostname,
                     savedItems: 0,
                     pageNumber: 1,
