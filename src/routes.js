@@ -48,11 +48,11 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
                 // KEYS OF OUTPUT OBJ
                 const company = item.querySelector("#sh-osd__online-sellers-cont > tr > td").innerText;
 
-                const price = item.querySelector("#sh-osd__online-sellers-cont > tr > td").innerText;
+                const price = item.querySelector("#sh-osd__online-sellers-cont > tr > td > span").innerText;
 
                 const details = item.querySelector("#sh-osd__online-sellers-cont > tr > td.SH30Lb.yGibJf").innerText;
 
-                const total = item.querySelector("#sh-osd__online-sellers-cont > tr > td").innerText;
+                const total = item.querySelector("#sh-osd__online-sellers-cont > tr > td > div > div.drzWO").innerText;
 
                 // FINAL OUTPUT OBJ
                 const output = {
