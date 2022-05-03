@@ -49,6 +49,10 @@ async function applyFunction(page, extendOutputFunction, item) {
     return { ...item, ...result };
 }
 
+function formUrl(inputUrl) {
+    const url = inputUrl;
+    return { url };
+}
 
 async function makeRequestList(inputUrl) {
     let sources = [];
