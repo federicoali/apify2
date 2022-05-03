@@ -46,7 +46,7 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
                 // Please pay attention that "merchantMetrics" and "reviewsLink" were removed from the  "SEARCH" page.
                 const item = results[i];
                 // KEYS OF OUTPUT OBJ
-                const company = item.querySelector("#sh-osd__online-sellers-cont > tr > td")?.innerText ?? null;
+                const company = item.querySelector("#sh-osd__online-sellers-cont > tr > td > div.kPMwsc > a")?.innerText ?? null;
 
                 const price = item.querySelector("#sh-osd__online-sellers-cont > tr > td > span")?.innerText ?? null;
 
