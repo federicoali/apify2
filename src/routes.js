@@ -33,7 +33,8 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
         (maxPostCount, query, savedItems) => {
             // nodes with items
             let results = Array.from(document.querySelectorAll('#sh-osd__online-sellers-cont'));
-            if (results.length === 0) results = Array.from(document.querySelectorAll('.sh.osd__offer-row'));
+            console.log('result', results)
+            if (results.length === 0) results = Array.from(document.querySelectorAll('.sh-dgr__content'));
             // limit the results to be scraped, if maxPostCount exists
             if (maxPostCount) {
                 results = results.slice(0, maxPostCount - savedItems);
