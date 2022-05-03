@@ -71,10 +71,10 @@ async function makeRequestList(inputUrl) {
             }
 
             return new Apify.Request({
-                url,
+                inputUrl,
                 userData: {
                     label: 'SEARCH_PAGE',
-                    query: url,
+                    query: inputUrl,
                     hostname: 'IT',
                     savedItems: 0,
                     pageNumber: 1,
