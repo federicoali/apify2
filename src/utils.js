@@ -49,19 +49,11 @@ async function applyFunction(page, extendOutputFunction, item) {
     return { ...item, ...result };
 }
 
-function countryCodeToGoogleHostname(countryCode) {
-    const suffix = countryCode.toUpperCase();
-    return googleDomains[suffix];
-}
 
-// New function which forms a URL from countryCode and query params
-function formHostname(countryCode) {
-    const hostname = countryCodeToGoogleHostname(countryCode);
-    return { hostname };
-}
 
-async function makeRequestList(inputUrl, countryCode) {
-    const hostname = formHostname(countryCode);
+
+
+async function makeRequestList(inputUrl) {
     let sources = [];
 
     if (inputUrl) {
@@ -83,7 +75,7 @@ async function makeRequestList(inputUrl, countryCode) {
                 userData: {
                     label: 'SEARCH_PAGE',
                     query: url,
-                    hostname,
+                    hostname: 'IT',
                     savedItems: 0,
                     pageNumber: 1,
                 },
