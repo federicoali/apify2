@@ -10,6 +10,8 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     let { savedItems, pageNumber } = request.userData;
     const { hostname } = request.userData;
 
+    await page.waitForNavigation();
+
     await page.waitForSelector('div.sg-product__dpdp-c');
 
     const resultsLength = await page.evaluate(() => {
