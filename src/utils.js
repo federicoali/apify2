@@ -49,22 +49,18 @@ async function applyFunction(page, extendOutputFunction, item) {
     return { ...item, ...result };
 }
 
-function countryCodeToGoogleHostname(countryCode) {
-    const suffix = countryCode.toUpperCase();
-    return googleDomains[suffix];
-}
 
 // New function which forms a URL from countryCode and query params
-function formUrl(countryCode, inputUrl) {
-    const hostname = countryCodeToGoogleHostname(countryCode);
+function formUrl(inputUrl) {
+    const hostname = "IT";
     const url = inputUrl;
     console.log('url', url, 'input', inputUrl);
     return { url, hostname };
 }
 
 
-async function makeRequestList(queries, inputUrl, countryCode) {
-    const hostname = countryCodeToGoogleHostname(countryCode);
+async function makeRequestList(inputUrl) {
+    const hostname = "IT";
     let sources = [];
 
     if (inputUrl) {
