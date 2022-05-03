@@ -30,21 +30,21 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     log.info(`Found ${resultsLength} products on the page.`);
     // eslint-disable-next-line no-shadow
     const data = await page.evaluate(
-        (maxPostCount, query, savedItems) => {
+        (maxPostCount, query, savedItems, resultsLength) => {
             // nodes with items
-            let results = Array.from(document.querySelectorAll('#sh-osd__online-sellers-grid'));
-            if (results.length === 0) results = Array.from(document.querySelectorAll('#sh-osd__online-sellers-cont > tr'));
+            //let results = Array.from(document.querySelectorAll('#sh-osd__online-sellers-grid'));
+            //if (results.length === 0) results = Array.from(document.querySelectorAll('#sh-osd__online-sellers-cont > tr'));
             // limit the results to be scraped, if maxPostCount exists
-            if (maxPostCount) {
-                results = results.slice(0, maxPostCount - savedItems);
-            }
+            //if (maxPostCount) {
+               // results = results.slice(0, maxPostCount - savedItems);
+            //}
             // limit the results to be scraped, if maxPostCount exists
             // eslint-disable-next-line no-shadow
             const data = [];
             // ITERATING NODES TO GET RESULTS
-            for (let i = 0; i < results.length; i++) {
+            for (let i = 0; i < resultsLength; i++) {
                 // Please pay attention that "merchantMetrics" and "reviewsLink" were removed from the  "SEARCH" page.
-                const item = results[i];
+                const item = resultsLength[i];
                 // KEYS OF OUTPUT OBJ
                 const company = item.querySelector("#sh-osd__online-sellers-cont > tr > td").innerText;
 
