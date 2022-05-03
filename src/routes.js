@@ -32,8 +32,8 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     const data = await page.evaluate(
         (maxPostCount, query, savedItems) => {
             // nodes with items
-            let results = Array.from(document.querySelectorAll('tr'));
-            if (results.length === 0) results = Array.from(document.querySelectorAll('tr'));
+            let results = Array.from(document.querySelectorAll('#sh-osd__online-sellers-cont'));
+            if (results.length === 0) results = Array.from(document.querySelectorAll('.sh-dgr__content'));
             // limit the results to be scraped, if maxPostCount exists
             if (maxPostCount) {
                 results = results.slice(0, maxPostCount - savedItems);
