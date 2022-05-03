@@ -57,7 +57,7 @@ function countryCodeToGoogleHostname(countryCode) {
 // New function which forms a URL from countryCode and query params
 
 
-async function makeRequestList(queries, inputUrl, countryCode) {
+async function makeRequestList(inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
     let sources = [];
 
@@ -80,7 +80,7 @@ async function makeRequestList(queries, inputUrl, countryCode) {
                 userData: {
                     label: 'SEARCH_PAGE',
                     query: url,
-                    hostname: 'IT',
+                    hostname,
                     savedItems: 0,
                     pageNumber: 1,
                 },
