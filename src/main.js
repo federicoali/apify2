@@ -11,14 +11,14 @@ Apify.main(async () => {
     // Validate the input
     if (!input) throw new Error('Missing configuration');
 
-    const {inputUrl = null, maxPostCount, extendOutputFunction = null } = input;
+    const { queries = null, inputUrl = null, countryCode = 'us', maxPostCount, extendOutputFunction = null } = input;
 
-    if (!inputUrl) {
-        throw new Error('"Input URL" must be provided');
+    if (!(queries && countryCode) && !inputUrl) {
+        throw new Error('At least "Search Queries & countryCode" or "Input URL" must be provided');
     }
 
     // Prepare the initial list of google shopping queries and request queue
-    const requestList = await makeRequestList(inputUrl);
+    const requestList = await makeRequestList(queries, inputUrl, countryCode);
     log.info('Search URLs:');
     requestList.requests.forEach((r) => { console.log('  ', r.url); });
 
