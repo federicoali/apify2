@@ -66,8 +66,35 @@ function formUrl(countryCode, inputUrl) {
 
 async function makeRequestList(queries, inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
+    let sources = [];
 
-    return Apify.openRequestList('products', inputUrl);
+    if (inputUrl) {
+        const startUrls = inputUrl;
+        
+        sources = startUrls.map((startUrl) => {
+            // URL has to start with plain http for SERP proxy to work
+            let { url } = startUrl;
+            if (url.startsWith('https')) {
+                url = url.replace('https', 'http');
+            }
+
+            if (url.startsWith('http://google')) {
+                url = url.replace('http://google', 'http://www.google');
+            }
+
+            return new Apify.Request({
+                url,
+                userData: {
+                    label: 'SEARCH_PAGE',
+                    query: url,
+                    hostname,
+                    savedItems: 0,
+                    pageNumber: 1,
+                },
+            });
+        });
+    } 
+    return Apify.openRequestList('products', sources);
 }
 
 // FUNCTION TO DEAL WITH ALL TYPES OF START URLS  (EXTERNAL CSV FILE, LOCAL TXT-FILE, NORMAL URL)
