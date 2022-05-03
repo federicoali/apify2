@@ -50,14 +50,11 @@ async function applyFunction(page, extendOutputFunction, item) {
 }
 
 
-
-
-
 async function makeRequestList(inputUrl) {
     let sources = [];
 
     if (inputUrl) {
-        const startUrls = inputUrl;
+        const startUrls = [];
         
         sources = startUrls.map((startUrl) => {
             // URL has to start with plain http for SERP proxy to work
@@ -71,10 +68,10 @@ async function makeRequestList(inputUrl) {
             }
 
             return new Apify.Request({
-                inputUrl,
+                url,
                 userData: {
                     label: 'SEARCH_PAGE',
-                    query: inputUrl,
+                    query: url,
                     hostname: 'IT',
                     savedItems: 0,
                     pageNumber: 1,
