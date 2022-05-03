@@ -66,41 +66,8 @@ function formUrl(countryCode, inputUrl) {
 
 async function makeRequestList(queries, inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
-    let sources = [];
-
-    if (!inputUrl) {
-        sources = queries.map((query) => {
-            const { url } = formUrl(countryCode, query);
-
-            return new Apify.Request({
-                url,
-                userData: {
-                    label: 'SEARCH_PAGE',
-                    query,
-                    hostname,
-                    savedItems: 0,
-                    pageNumber: 1,
-                },
-            });
-        });
-    } else {
-        const startUrls = inputUrl;
-        
-        sources = startUrls.map((query) => {
-            const { url } = formUrl(countryCode, query);
-
-            return new Apify.Request({
-                url,
-                userData: {
-                    label: 'SEARCH_PAGE',
-                    query,
-                    hostname,
-                    savedItems: 0,
-                    pageNumber: 1,
-                },
-            });
-        });
-    }
+    let sources = [inputUrl];
+    
     return Apify.openRequestList('products', sources);
 }
 
