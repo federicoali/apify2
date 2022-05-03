@@ -30,7 +30,7 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     log.info(`Found ${resultsLength} products on the page.`);
     // eslint-disable-next-line no-shadow
     const data = await page.evaluate(
-        (maxPostCount, query, savedItems, utils) => {
+        (maxPostCount, query, savedItems, log) => {
             // nodes with items
             log.info('sono dentro');
             let results = Array.from(document.querySelectorAll('#sh-osd__online-sellers-cont'));
