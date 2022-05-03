@@ -54,7 +54,7 @@ async function makeRequestList(inputUrl) {
     let sources = [];
 
     if (inputUrl) {
-        const startUrls = [];
+        const startUrls = inputUrl;
         
         sources = startUrls.map((startUrl) => {
             // URL has to start with plain http for SERP proxy to work
