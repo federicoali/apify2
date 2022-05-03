@@ -41,7 +41,6 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
                 results = results.slice(0, maxPostCount - savedItems);
             }
             // limit the results to be scraped, if maxPostCount exists
-            console.log('result', results)
             // eslint-disable-next-line no-shadow
             const data = [];
             // ITERATING NODES TO GET RESULTS
