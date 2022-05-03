@@ -66,9 +66,8 @@ function formUrl(countryCode, inputUrl) {
 
 async function makeRequestList(queries, inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
-    let sources = inputUrl;
 
-    return Apify.openRequestList('products', sources);
+    return Apify.openRequestList('products', inputUrl);
 }
 
 // FUNCTION TO DEAL WITH ALL TYPES OF START URLS  (EXTERNAL CSV FILE, LOCAL TXT-FILE, NORMAL URL)
