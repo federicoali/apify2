@@ -32,7 +32,7 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
     const data = await page.evaluate(
         (maxPostCount, query, savedItems) => {
             // nodes with items
-            let results = Array.from(document.getElementById('sh-osd__online-sellers-cont'));
+            let results = Array.from(document.querySelectorAll('.d0wB0c'));
             // limit the results to be scraped, if maxPostCount exists
             console.log('result', results)
             // eslint-disable-next-line no-shadow
