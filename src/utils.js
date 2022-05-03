@@ -51,10 +51,13 @@ async function applyFunction(page, extendOutputFunction, item) {
 
 
 // New function which forms a URL from countryCode and query params
-
+function formHostname(countryCode) {
+    const hostname = countryCodeToGoogleHostname(countryCode);
+    return { hostname };
+}
 
 async function makeRequestList(inputUrl, countryCode) {
-    const hostname = countryCodeToGoogleHostname(countryCode);
+    const hostname = formHostname(countryCode);
     let sources = [];
 
     if (inputUrl) {
