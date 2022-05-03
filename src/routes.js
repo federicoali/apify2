@@ -33,6 +33,11 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
         (maxPostCount, query, savedItems) => {
             // nodes with items
             let results = Array.from(document.querySelectorAll('.d0wB0c'));
+            if (results.length === 0) results = Array.from(document.querySelectorAll('.sh-osd__offer-row'));
+            // limit the results to be scraped, if maxPostCount exists
+            if (maxPostCount) {
+                results = results.slice(0, maxPostCount - savedItems);
+            }
             // limit the results to be scraped, if maxPostCount exists
             console.log('result', results)
             // eslint-disable-next-line no-shadow
@@ -58,7 +63,6 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
                     price,
                     total,
                     positionOnSearchPage: i + 1,
-                    productDetails: item.querySelectorAll('.translate-content')[1]?.textContent.trim(),
                 };
 
                 data.push(output);
