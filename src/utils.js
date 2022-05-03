@@ -49,10 +49,6 @@ async function applyFunction(page, extendOutputFunction, item) {
     return { ...item, ...result };
 }
 
-function countryCodeToGoogleHostname(countryCode) {
-    const suffix = countryCode.toUpperCase();
-    return googleDomains[suffix];
-}
 
 // New function which forms a URL from countryCode and query params
 function formUrl(countryCode, inputUrl) {
