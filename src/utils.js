@@ -68,7 +68,13 @@ async function makeRequestList(queries, inputUrl, countryCode) {
     let sources = [];
 
     if (inputUrl) {
-        const startUrls = inputUrl;
+        const startUrls = [];
+        for await (const req of fromStartUrls(inputUrl)) {
+            // Parse out the keyword from the provided URL and format it into our own URL
+            // Why? Selectors seem to be different depending on the TYPE of Google Shopping page you're on
+            const { url } = formUrl(countryCode, inputUrl);
+            startUrls.push({ ...req, url });
+        }
         
         sources = startUrls.map((startUrl) => {
             // URL has to start with plain http for SERP proxy to work
