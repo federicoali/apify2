@@ -46,13 +46,13 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
                 // Please pay attention that "merchantMetrics" and "reviewsLink" were removed from the  "SEARCH" page.
                 const item = results[i];
                 // KEYS OF OUTPUT OBJ
-                const company = item.querySelector("#sh-osd__online-sellers-cont > tr > td > div._-ek > a")?.innerText ?? null;
+                const company = item.querySelector("#sh-osd__online-sellers-cont > tr > td > div.kPMwsc > a")?.innerText ?? null;
 
                 const price = item.querySelector("#sh-osd__online-sellers-cont > tr > td > span")?.innerText ?? null;
 
-                const details = item.querySelector("#sh-osd__online-sellers-cont > tr > td._-fg._-e- > div")?.innerText ?? null;
+                const details = item.querySelector("#sh-osd__online-sellers-cont > tr > td.SH30Lb.yGibJf > div")?.innerText ?? null;
 
-                const total = item.querySelector("#sh-osd__online-sellers-cont > tr > td > div > div._-fH")?.innerText ?? null;
+                const total = item.querySelector("#sh-osd__online-sellers-cont > tr > td > div > div.drzWO")?.innerText ?? null;
 
                 // FINAL OUTPUT OBJ
                 const output = {
