@@ -29,6 +29,9 @@ Apify.main(async () => {
     let evaledFunc;
     if (extendOutputFunction) evaledFunc = checkAndEval(extendOutputFunction);
 
+    const proxyConfiguration = await Apify.createProxyConfiguration({
+        groups: ['GOOGLE_SERP'],
+    });
 
     // crawler config
     const crawler = new Apify.PuppeteerCrawler({
@@ -40,6 +43,7 @@ Apify.main(async () => {
         navigationTimeoutSecs: 150,
         handlePageTimeoutSecs: 240,
         maxConcurrency: 10,
+        proxyConfiguration,
         handlePageFunction: async ({ page, request }) => {
             log.info(`Processing: ${request.url}`);
             log.info(`Number of page: ${request.userData.pageNumber}`);
