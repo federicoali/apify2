@@ -72,20 +72,20 @@ async function makeRequestList(queries, inputUrl, countryCode) {
         
         sources = startUrls.map((startUrl) => {
             // URL has to start with plain http for SERP proxy to work
-            let { url } = startUrl;
-            if (url.startsWith('https://google')) {
-                url = url.replace('https://google', 'http://www.google.it');
+            let { inputUrl } = startUrl;
+            if (inputUrl.startsWith('https')) {
+                inputUrl = inputUrl.replace('https', 'http');
             }
 
-            if (url.startsWith('http://google')) {
-                url = url.replace('http://google', 'http://www.google.it');
+            if (inputUrl.startsWith('http://google')) {
+                inputUrl = inputUrl.replace('http://google', 'http://www.google.it');
             }
 
             return new Apify.Request({
-                url,
+                inputUrl,
                 userData: {
                     label: 'SEARCH_PAGE',
-                    query: url,
+                    query: inputUrl,
                     hostname,
                     savedItems: 0,
                     pageNumber: 1,
