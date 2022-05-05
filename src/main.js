@@ -29,9 +29,7 @@ Apify.main(async () => {
     let evaledFunc;
     if (extendOutputFunction) evaledFunc = checkAndEval(extendOutputFunction);
 
-    const proxyConfiguration = await Apify.createProxyConfiguration({
-        groups: ['GOOGLE_SERP'],
-    });
+    const proxyConfiguration = "http://groups-GOOGLE_SERP:apify_proxy_jgpYZF9OHPdbX9KfRuhXsFgdlBw8mM4vm6NZ@proxy.apify.com:8000"
 
     // crawler config
     const crawler = new Apify.PuppeteerCrawler({
