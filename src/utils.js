@@ -82,10 +82,10 @@ async function makeRequestList(queries, inputUrl, countryCode) {
             }
 
             return new Apify.Request({
-                inputUrl,
+                url,
                 userData: {
                     label: 'SEARCH_PAGE',
-                    query: url,
+                    query,
                     hostname,
                     savedItems: 0,
                     pageNumber: 1,
