@@ -37,13 +37,13 @@ Apify.main(async () => {
     const crawler = new Apify.PuppeteerCrawler({
         requestList,
         requestQueue,
-        useSessionPool: false,
-        persistCookiesPerSession: false,
+        proxyConfiguration,
+        useSessionPool: true,
+        persistCookiesPerSession: true,
         maxRequestRetries: 15,
         navigationTimeoutSecs: 150,
         handlePageTimeoutSecs: 240,
         maxConcurrency: 10,
-        proxyConfiguration,
         handlePageFunction: async ({ page, request }) => {
             log.info(`Processing: ${request.url}`);
             log.info(`Number of page: ${request.userData.pageNumber}`);
