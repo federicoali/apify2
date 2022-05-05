@@ -31,7 +31,7 @@ Apify.main(async () => {
 
     const proxyConfiguration = await Apify.createProxyConfiguration({
         groups: ['RESIDENTIAL'],
-        countryCode: 'IT',
+        countryCode: 'US',
     });
 
     // crawler config
