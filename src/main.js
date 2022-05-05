@@ -30,7 +30,7 @@ Apify.main(async () => {
     if (extendOutputFunction) evaledFunc = checkAndEval(extendOutputFunction);
 
     const proxyConfiguration = await Apify.createProxyConfiguration({
-        countryCode: 'IT',
+        countryCode: 'it',
     });
 
     // crawler config
