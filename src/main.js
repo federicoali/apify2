@@ -11,7 +11,7 @@ Apify.main(async () => {
     // Validate the input
     if (!input) throw new Error('Missing configuration');
 
-    const { queries = null, inputUrl = null, countryCode = 'it', maxPostCount, extendOutputFunction = null } = input;
+    const { queries = null, inputUrl = null, countryCode = 'us', maxPostCount, extendOutputFunction = null } = input;
 
     if (!(queries && countryCode) && !inputUrl) {
         throw new Error('At least "Search Queries & countryCode" or "Input URL" must be provided');
@@ -37,7 +37,7 @@ Apify.main(async () => {
     const crawler = new Apify.PuppeteerCrawler({
         requestList,
         requestQueue,
-        useSessionPool: true,
+        persistCookiesPerSession: true,
         maxRequestRetries: 15,
         navigationTimeoutSecs: 150,
         handlePageTimeoutSecs: 240,
