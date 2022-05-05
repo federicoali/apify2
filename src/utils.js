@@ -67,7 +67,7 @@ async function makeRequestList(queries, inputUrl, countryCode) {
     const hostname = countryCodeToGoogleHostname(countryCode);
     let sources = [];
 
-    if (inputUrl) {
+    while (inputUrl) {
         const startUrls = inputUrl;
         
         sources = startUrls.map((startUrl) => {
