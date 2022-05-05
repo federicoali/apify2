@@ -77,8 +77,8 @@ async function makeRequestList(queries, inputUrl, countryCode) {
                 url = url.replace('https', 'http');
             }
 
-            if (url.startsWith('https://google.com')) {
-                url = url.replace('https://google.com', 'http://www.google.it');
+            if (url.startsWith('http://google')) {
+                url = url.replace('http://google', 'http://www.google');
             }
 
             return new Apify.Request({
