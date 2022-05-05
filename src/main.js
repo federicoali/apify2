@@ -22,7 +22,6 @@ Apify.main(async () => {
     log.info('Search URLs:');
     requestList.requests.forEach((r) => { console.log('  ', r.url); });
 
-    const requestQueue = await Apify.openRequestQueue();
 
 
     // if exists, evaluate extendOutputFunction
@@ -36,7 +35,6 @@ Apify.main(async () => {
     // crawler config
     const crawler = new Apify.PuppeteerCrawler({
         requestList,
-        requestQueue,
         persistCookiesPerSession: true,
         maxRequestRetries: 15,
         navigationTimeoutSecs: 150,
@@ -47,7 +45,7 @@ Apify.main(async () => {
             log.info(`Processing: ${request.url}`);
             log.info(`Number of page: ${request.userData.pageNumber}`);
             const { label, query } = request.userData;
-            return routes[label](page, request, query, requestQueue, maxPostCount, evaledFunc);
+            return routes[label](page, request, query, maxPostCount, evaledFunc);
         },
 
         handleFailedRequestFunction: async ({ request }) => {

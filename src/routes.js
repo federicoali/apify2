@@ -5,7 +5,7 @@ const {
 } = Apify;
 const { applyFunction } = require('./utils');
 
-exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, evaledFunc) => {
+exports.SEARCH_PAGE = async (page, request, query, maxPostCount, evaledFunc) => {
     // CHECK FOR SELECTOR
     let { savedItems, pageNumber } = request.userData;
     const { hostname } = request.userData;
