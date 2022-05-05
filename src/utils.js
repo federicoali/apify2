@@ -74,7 +74,7 @@ async function makeRequestList(queries, inputUrl, countryCode) {
             // URL has to start with plain http for SERP proxy to work
             let { url } = startUrl;
             if (url.startsWith('https')) {
-                url = url.replace('https', 'http');
+                url = url.replace('https', 'https');
             }
 
             if (url.startsWith('http://google')) {
