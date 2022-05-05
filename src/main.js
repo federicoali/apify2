@@ -30,7 +30,6 @@ Apify.main(async () => {
     if (extendOutputFunction) evaledFunc = checkAndEval(extendOutputFunction);
 
     const proxyConfiguration = await Apify.createProxyConfiguration({
-        groups: ['GOOGLE_SERP'],
         countryCode: 'IT',
     });
 
