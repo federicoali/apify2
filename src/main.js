@@ -37,7 +37,8 @@ Apify.main(async () => {
     const crawler = new Apify.PuppeteerCrawler({
         requestList,
         requestQueue,
-        useSessionPool: true,
+        useSessionPool: false,
+        persistCookiesPerSession: false,
         maxRequestRetries: 15,
         navigationTimeoutSecs: 150,
         handlePageTimeoutSecs: 240,
