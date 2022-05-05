@@ -30,8 +30,11 @@ Apify.main(async () => {
     if (extendOutputFunction) evaledFunc = checkAndEval(extendOutputFunction);
 
     const proxyConfiguration = await Apify.createProxyConfiguration({
-        countryCode: 'it',
-    });
+        host: "proxy.apify.com",
+        port: "8000",
+        // Replace <YOUR_PROXY_PASSWORD> below with your password
+        // found at https://console.apify.com/proxy
+        auth: "groups-GOOGLE_SERP:apify_proxy_jgpYZF9OHPdbX9KfRuhXsFgdlBw8mM4vm6NZ"    });
 
     // crawler config
     const crawler = new Apify.PuppeteerCrawler({
