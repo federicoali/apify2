@@ -43,7 +43,6 @@ exports.SEARCH_PAGE = async (page, request, query, requestQueue, maxPostCount, e
             const data = [];
             // ITERATING NODES TO GET RESULTS
             for (let i = 0; i < results.length; i++) {
-                // Please pay attention that "merchantMetrics" and "reviewsLink" were removed from the  "SEARCH" page.
                 const item = results[i];
                 // KEYS OF OUTPUT OBJ
                 const company = item.querySelector("#sh-osd__online-sellers-cont > tr > td > div.kPMwsc > a")?.innerText ?? null;

@@ -38,7 +38,6 @@ Apify.main(async () => {
         requestList,
         requestQueue,
         useSessionPool: true,
-        persistCookiesPerSession: true,
         maxRequestRetries: 15,
         navigationTimeoutSecs: 150,
         handlePageTimeoutSecs: 240,
